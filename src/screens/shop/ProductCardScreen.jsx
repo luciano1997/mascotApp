@@ -1,11 +1,14 @@
 import { Image, Pressable, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState } from 'react';
+import { addToCart } from '../../store/slices/cartSlice';
+import { useDispatch } from 'react-redux';
 
 
 const ProductCard = ({ product, onPress }) => {
     const [imageIndex, setImageIndex] = useState(0);
     const images = product.images || [];
+    const dispatch = useDispatch();
 
     const handlePrev = () => {
         setImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -64,7 +67,7 @@ const ProductCard = ({ product, onPress }) => {
                     </View>
                 )}
 
-                <Button icon="plus" mode="contained" onPress={() => console.log(product)}>
+                <Button icon="plus" mode="contained" onPress={() => dispatch(addToCart({product:product, quantity:1}))}>
                     Agregar al carro
                 </Button>
             </View>

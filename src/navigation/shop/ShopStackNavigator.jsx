@@ -6,13 +6,12 @@ const Stack = createNativeStackNavigator();
 
 const ShopStackNavigation = () => {
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="CategoryList" component={CategoryList} />
-                <Stack.Screen name="ProductList" component={ProductList} />
-                <Stack.Screen name="ProductCard" component={ProductCard} />
+            <Stack.Navigator
+            >
+                <Stack.Screen options={{ headerShown: false }} name="CategoryList" component={CategoryList} />
+                <Stack.Screen  name="ProductList" component={ProductList} />
+                <Stack.Screen options={{ headerShown: false }} name="ProductCard" component={ProductCard} />
             </Stack.Navigator>
-        </NavigationContainer>
     );
 };
 export default ShopStackNavigation;
