@@ -1,22 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ProductList, CartScreen, CategoryList } from '../../screens';
-import { NavigationContainer } from "@react-navigation/native";
-import { Button } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
-import ShopStackNavigation from '../shop/ShopStackNavigator';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StyleSheet } from 'react-native';
 import CartStackNavigation from '../cart/CartStackNavigator';
+import OrderStackNavigation from '../order/OrderStackNavigator';
+import ShopStackNavigation from '../shop/ShopStackNavigator';
 import UserStackNavigation from '../user/UserNavigator';
+import Header from '../../components/Header';
 const TabsNavigator = () => {
   const Tab = createBottomTabNavigator();
 
   return (
     <>
+    <Header />
       <Tab.Navigator>
         <Tab.Screen
-          name="shop"
+          name="Tienda"
           // no mostrar en header
-          
+
           component={ShopStackNavigation}
           //aplicar un icono
           options={{
@@ -26,17 +26,9 @@ const TabsNavigator = () => {
             ),
           }}
         />
+
         <Tab.Screen
-          name="Profile"
-          component={UserStackNavigation}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-                <MaterialIcons name={"account-box"} color={color} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="cart"
+          name="Carrito"
           component={CartStackNavigation}
           options={{
             headerShown: false,
@@ -45,7 +37,26 @@ const TabsNavigator = () => {
             ),
           }}
         />
-
+        <Tab.Screen
+          name="Ordenes"
+          component={OrderStackNavigation}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+                <MaterialIcons name={"receipt"} color={color} size={size} />
+            ),
+          }}
+        />
+		<Tab.Screen
+          name="Perfil"
+          component={UserStackNavigation}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+                <MaterialIcons name={"account-box"} color={color} size={size} />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </>
   )
