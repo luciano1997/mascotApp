@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
 
-export const profileApi = createApi({
-    reducerPath: "profileApi",
+export const userProfileApi = createApi({
+    reducerPath: "userProfileApi",
     baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
     endpoints: (builder) => ({
         getProfilePicture: builder.query({
@@ -22,4 +22,4 @@ export const profileApi = createApi({
     })
 })
 
-export const { useGetProfilePictureQuery, usePutProfilePictureMutation } = profileApi
+export const { useGetProfilePictureQuery, usePutProfilePictureMutation } = userProfileApi;
