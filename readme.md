@@ -3,7 +3,7 @@
 
 > Tu tienda de mascotas amiga
 
-MascotApp es una app móvil donde podés explorar productos para mascotas, agregarlos al carrito y gestionar tus compras de forma simple y rápida.
+MascotApp es una app móvil donde puedess explorar productos para mascotas, agregarlos al carrito y gestionar tus compras de forma simple y rápida.
 
 ## Alcances y objetivos
 
@@ -46,7 +46,7 @@ Cada librería fue elegida para simplificar el desarrollo, mejorar la experienci
    ```sh
    npx expo start
    ```
-4. Escanea el QR con la app de Expo Go o ejecutá en un emulador Android/iOS.
+4. Escanea el QR con la app de Expo Go o ejecuta en un emulador Android/iOS.
 
 ¡Listo! Ya puedes comprar en MascotApp... tu tienda de mascotas amiga.
 
