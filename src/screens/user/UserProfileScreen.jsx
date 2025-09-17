@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker';
 import { usePutProfilePictureMutation } from '../../services/userProfileApi'
-import { setImage } from '../../store/slices/authSlice';
+import { setEmail, setImage, setIsLoggedIn, setLocalId } from '../../store/slices/authSlice';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import { clearSession } from '../../database';
 
 const UserProfileScreen = () => {
 
@@ -23,8 +24,6 @@ const UserProfileScreen = () => {
 
     const dispatch = useDispatch()
 
-    //console.log("Location:", location)
-    //console.log("localId desde profileScreen:", localId)
     console.log("Address", address)
 
     const pickImage = async () => {
@@ -43,8 +42,17 @@ const UserProfileScreen = () => {
             triggerPutProfilePicture({ localId: localId, image: imgBase64 })
         }
     }
+    const handleLogout = async () => {
+
+        await clearSession();
+        dispatch(setEmail(null))
+        dispatch(setLocalId(null))
+        dispatch(setIsLoggedIn(false))
+    }
 
     useEffect(() => {
+        console.log("location effect");
+        
         async function getCurrentLocation() {
             try {
                 let { status } = await Location.requestForegroundPermissionsAsync();
@@ -101,7 +109,7 @@ const UserProfileScreen = () => {
                                 longitudeDelta: 0.0421,
                             }}
                         >
-                            <Marker coordinate={{ "latitude": location.coords.latitude, "longitude": location.coords.longitude }} title={"Mundo Geek"} />
+                            <Marker coordinate={{ "latitude": location.coords.latitude, "longitude": location.coords.longitude }} title={"Tu ubicacion"} />
                         </MapView>
                         :
                         (
@@ -125,6 +133,14 @@ const UserProfileScreen = () => {
                 <View style={styles.addressContainer}>
                     <Text style={styles.address}>{address || ""}</Text>
                 </View>
+            </View>
+            <View style={styles.rememberTextContainer}>
+                <Text style={styles.rememberText}> Recuerda que tienes envio Gratis y en 24H para la region metropolitana en tu primera compra</Text>
+            </View>
+            <View style={styles.logoutContainer}>
+                <Pressable onPress={handleLogout}> 
+                    <Text style={styles.logoutText}> Cerrar sesión</Text>
+                </Pressable>
             </View>
         </View>
     )
@@ -174,11 +190,46 @@ const styles = StyleSheet.create({
     map: {
         height: 240,
     },
-    mapTitle: {
-        fontWeight: '700'
-    },
     placeDescriptionContainer: {
         flexDirection: 'row',
         gap: 16
+    },
+    rememberTextContainer: {
+        marginTop: 16,
+        paddingHorizontal: 16
+    },
+    rememberText: {
+        fontSize: 16,
+        textAlign: 'center',
+        fontFamily: 'textMeOn',
+        marginTop: 16,
+        color: colors.gray
+
+    },
+    addressContainer: {
+        flexDirection: 'row',
+        gap: 8,
+        alignItems: 'center',
+        marginTop: 8
+    },
+    address: {
+        fontWeight: 'bold',
+        flexShrink: 1,
+        textAlign: 'center',
+        fontFamily: 'textMeOn'
+    },
+    logoutContainer: {
+        marginTop: 32,  
+        backgroundColor: colors.error,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 6,
+        width: 'auto',
+        height: 40,
+    },
+    logoutText: {
+        color: colors.white,
+        fontSize: 16,
+        fontWeight: 'bold'
     }
 })
