@@ -1,17 +1,19 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import { use, useEffect, useState } from 'react';
 import ProductCard from './ProductCardScreen';
-import { useRoute } from '@react-navigation/native';
 import { useGetProductsByCategoryQuery } from '../../services/shopApi';
+import { useSelector } from 'react-redux';
 
 const ProductList = () => {
-  const route = useRoute();
-  const { categoryId } = route.params;
-  console.log("categoryId", categoryId);
-  const {data:products, isLoading, error} = useGetProductsByCategoryQuery(categoryId)
+
+  // traer desde el reducer el categorySelected
+   const categorySelected = useSelector(state => state.shopReducer.categorySelected);
+
+
+  const {data:products, isLoading, error} = useGetProductsByCategoryQuery(categorySelected);
 
   useEffect(() => {
-    products && console.log("Products by category:", products);
+    // products && console.log("Products by category:", products);
     if (error) {
       console.log("Error fetching products:", error);
     }

@@ -14,12 +14,19 @@ export const shopApi = createApi({
                 query: (categoryId) => `products.json?orderBy="categoryId"&equalTo=${categoryId}`,
                 transformResponse: (response) => {
                     const products = Object.values(response);
-                    console.log("products", products);
-
                     return products;
                 }
+            }),
+            updateProductStock: builder.mutation({
+                query: ({ productId, newStock }) => ({
+                    url: `products/${productId}.json`,
+                    method: 'PATCH',
+                    body: { stock: newStock }
+                }),
+                // invalidatesTags: (result, error, arg) => [{ type: 'Products', id: arg.productId }]
             })
+
         }
     )
 })
-export const { useGetCategoriesQuery, useGetProductsByCategoryQuery } = shopApi;
+export const { useGetCategoriesQuery, useGetProductsByCategoryQuery, useUpdateProductStockMutation } = shopApi;

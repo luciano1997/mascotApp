@@ -9,7 +9,7 @@ const ShopStackNavigation = () => {
             <Stack.Navigator
             >
                 <Stack.Screen options={{ headerShown: false }} name="CategoryList" component={CategoryList} />
-                <Stack.Screen  name="ProductList" component={ProductList} />
+                <Stack.Screen  options={{ headerShown: false }} name="ProductList" component={ProductList} />
                 <Stack.Screen options={{ headerShown: false }} name="ProductCard" component={ProductCard} />
             </Stack.Navigator>
     );
