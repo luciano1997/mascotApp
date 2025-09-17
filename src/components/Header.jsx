@@ -1,17 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { useFonts } from 'expo-font'
-import { loadFonts } from '../../fonts';
+import { colors } from '../global/colors';
 import { useEffect } from 'react';
 import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 const Header = () => {
-  useEffect(() => {
-          const loadFont = async () => {
-              await loadFonts();
-          };
-          loadFont();
-      }, [])
+
 
   return (
     <View style={styles.viewPrincipal}>
@@ -29,7 +23,7 @@ const styles = StyleSheet.create({
         height: height * 0.1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'beige',
+        backgroundColor: colors.secondary,
     },
     text: {
         fontSize: 40,
