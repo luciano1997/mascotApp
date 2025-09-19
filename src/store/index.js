@@ -22,7 +22,7 @@ export const store = configureStore({
     [orderApi.reducerPath]: orderApi.reducer,
     
   },
-   middleware: (getDefaultMiddleware)=>(getDefaultMiddleware().concat(shopApi.middleware).concat(authApi.middleware).concat(userProfileApi.middleware).concat(orderApi.middleware))
+   middleware: (getDefaultMiddleware)=>(getDefaultMiddleware({immutableCheck: false}).concat(shopApi.middleware).concat(authApi.middleware).concat(userProfileApi.middleware).concat(orderApi.middleware))
 })
 
 setupListeners(store.dispatch)

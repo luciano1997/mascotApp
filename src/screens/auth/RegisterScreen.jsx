@@ -6,13 +6,13 @@ import { useDispatch } from 'react-redux';
 import { colors } from '../../global/colors';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 const RegisterScreen = ({ navigation }) => {
-    const [emailInput, setEmailInput] = useState('lucianogarridosepulveda4@gmail.com');
+    const [emailInput, setEmailInput] = useState('lucian@gmail.com');
     const [password, setPassword] = useState('Aa123456');
     const [confirmPassword, setConfirmPassword] = useState('Aa123456');
     const [triggerSignup, result] = useSignupMutation();
 
     const handleRegister = () => {
-
+        console.log("registro");
         triggerSignup({ email: emailInput, password});
     };
     const dispatch = useDispatch();

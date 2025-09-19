@@ -6,23 +6,30 @@ import OrderStackNavigation from '../order/OrderStackNavigator';
 import ShopStackNavigation from '../shop/ShopStackNavigator';
 import UserStackNavigation from '../user/UserNavigator';
 import Header from '../../components/Header';
+import { colors } from '../../global/colors';
 const TabsNavigator = () => {
   const Tab = createBottomTabNavigator();
 
   return (
     <>
-    <Header />
+      <Header />
       <Tab.Navigator>
         <Tab.Screen
           name="Tienda"
+          // screenOptions={{
+          //   tabBarActiveTintColor: colors.primary,
+          //   tabBarInactiveTintColor: colors.gray,
+          // }}
           // no mostrar en header
 
           component={ShopStackNavigation}
           //aplicar un icono
           options={{
             headerShown: false,
+            tabBarActiveTintColor: colors.secondary,
+            tabBarInactiveTintColor: colors.primary,
             tabBarIcon: ({ color, size }) => (
-                <MaterialIcons name={"category"} color={color} size={size} />
+              <MaterialIcons name={"category"} color={color} size={size} />
             ),
           }}
         />
@@ -32,8 +39,10 @@ const TabsNavigator = () => {
           component={CartStackNavigation}
           options={{
             headerShown: false,
+            tabBarActiveTintColor: colors.secondary,
+            tabBarInactiveTintColor: colors.primary,
             tabBarIcon: ({ color, size }) => (
-                <MaterialIcons name={"shopping-cart"} color={color} size={size} />
+              <MaterialIcons name={"shopping-cart"} color={color} size={size} />
             ),
           }}
         />
@@ -41,19 +50,23 @@ const TabsNavigator = () => {
           name="Ordenes"
           component={OrderStackNavigation}
           options={{
+            tabBarActiveTintColor: colors.secondary,
+            tabBarInactiveTintColor: colors.primary,
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-                <MaterialIcons name={"receipt"} color={color} size={size} />
+              <MaterialIcons name={"receipt"} color={color} size={size} />
             ),
           }}
         />
-		<Tab.Screen
+        <Tab.Screen
           name="Perfil"
           component={UserStackNavigation}
           options={{
+            tabBarActiveTintColor: colors.secondary,
+            tabBarInactiveTintColor: colors.primary,
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-                <MaterialIcons name={"account-box"} color={color} size={size} />
+              <MaterialIcons name={"account-box"} color={color} size={size} />
             ),
           }}
         />

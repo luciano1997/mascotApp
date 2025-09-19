@@ -8,18 +8,22 @@ import { clearSession, saveSession } from '../../database';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 const LoginScreen = ({ navigation }) => {
 
-  const [emailInput, setEmailInput] = useState('luciano@gmail.com');
-  const [passwordInput, setPasswordInput] = useState('Aa123456');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   const [persistSession, setPersistSession] = useState(false);
   const [triggerLogin, result] = useLoginMutation();
   const dispatch = useDispatch();
 
   const handleLogin = () => {
+    console.log("login");
+    
     triggerLogin({ email: emailInput, password: passwordInput })
 
   };
   useEffect(() => {
     (async () => {
+      console.log(result);
+      
       if (result.status === "fulfilled") {
         try {
           if (persistSession) {
